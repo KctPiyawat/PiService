@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import kct.piyawat.piservice.MainActivity;
 import kct.piyawat.piservice.R;
@@ -122,6 +123,23 @@ public class RegisterFragment extends Fragment{
             AddNewUserToMySQL addNewUserToMySQL = new AddNewUserToMySQL(getActivity());
             addNewUserToMySQL.execute(nameString,genderString,userString,
             passwordString,myConstance.getUrlAddUserString());
+
+            String strResult = addNewUserToMySQL.get();
+            if (Boolean.parseBoolean(strResult)) {
+//                Result True
+                Toast.makeText(getActivity(),"Save User Success",Toast.LENGTH_SHORT).show();
+
+                getActivity().getSupportFragmentManager().popBackStack();
+
+            } else {
+//                 Result False
+                MyAlert myAlert = new MyAlert(getActivity());
+                myAlert.myDialog("Can Not Save User",
+                        "Please Try Again ");
+
+
+
+            }
 
             Log.d(tag, "Result ===> " + addNewUserToMySQL.get());
 
