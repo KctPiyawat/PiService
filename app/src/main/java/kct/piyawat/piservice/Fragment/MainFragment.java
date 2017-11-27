@@ -6,16 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import kct.piyawat.piservice.R;
+import kct.piyawat.piservice.utility.MyAlert;
 
 /**
  * Created by asus on 27/10/2560.
  */
 
 public class MainFragment extends Fragment {
-
+//    Explicit
+    private String userString, passwordString;
 //    Create Main Method
 
 
@@ -26,7 +30,39 @@ public class MainFragment extends Fragment {
 //        Register Controller
         registerController();
 
+//        Login Controller
+        loginController();
+
     } // Main Method
+
+    private void loginController() {
+        Button button = getView().findViewById(R.id.btnLogin);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                Initial View
+                EditText userEditText = getView().findViewById(R.id.edtUser);
+                EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+//                Get Value From EditText
+                userString = userEditText.getText().toString().trim();
+
+                passwordString = passwordEditText.getText().toString().trim();
+
+//                Check Space
+                if (userString.isEmpty() || passwordString.isEmpty()) {
+//                     Have Space
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog(getString(R.string.title_have_space),
+                            getString(R.string.message_have_space));
+
+                } else {
+                }
+
+            } // onClick
+        });
+    }
 
     private void registerController() {
 //        Initial View
